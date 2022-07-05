@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include "batteryCheckStub.h"
 
 int batteryCheck(float currentValue, float minValue, float maxValue)
 {
