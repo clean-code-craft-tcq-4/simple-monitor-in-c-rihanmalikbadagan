@@ -4,12 +4,7 @@
 
 int batteryIsOk(float temperature, float soc, float chargeRate) {
 
-  if(batteryCheck(temperature, 0, 45) && batteryCheck(soc, 20, 80) && batteryCheck(chargeRate, 0, 0.8))
-  {
-    return IS_OK;
-  }
-
-  return NOT_OK;
+  return (batteryCheck(temperature, 0, 45) && batteryCheck(soc, 20, 80) && batteryCheck(chargeRate, 0, 0.8));
 }
 
 int main() {
