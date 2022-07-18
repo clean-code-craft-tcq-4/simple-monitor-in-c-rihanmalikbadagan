@@ -4,7 +4,7 @@
 
 int isApproachingLowerThreshold(float currentValue, float toleranceLimit)
 {
-    if (currentValue < (minValue + TOLERENCE_LIMIT(maxValue)))
+    if (currentValue <= toleranceLimit)
     {
         return LOW_LIMIT;
     }
@@ -14,7 +14,7 @@ int isApproachingLowerThreshold(float currentValue, float toleranceLimit)
 
 int isApproachingHigherThreshold(float currentValue, float toleranceLimit)
 {
-    if (currentValue > (maxValue - TOLERANCE_LIMIT(maxValue)))
+    if (currentValue >= toleranceLimit)
     {
         return HIGH_LIMIT;
     }
@@ -69,7 +69,7 @@ int checkParameters (float currentValue, float minValue, float maxValue)
     return IS_OK;
 }
 
-int batteryCheck(BatteryParameters parameters)
+int batteryCheck(struct BatteryParameters parameters)
 {
 
     if ((checkParameters(parameters.temperature, TEMP_LOW_LIMIT, TEMP_HIGH_LIMIT) 

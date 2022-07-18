@@ -32,4 +32,4 @@ struct BatteryParameters
 };
 
 int 
-batteryCheck(float currentValue, float minValue, float maxValue);
+batteryCheck(struct BatteryParameters parameters);
