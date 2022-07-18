@@ -106,6 +106,7 @@ void checkChargeRateApproachingLimit(float currentChargeRate)
 
 int checkParameters (float currentValue, float minValue, float maxValue)
 {
+    printf("\n %f ## %f ## %f\n",currentValue,minValue,maxValue);
     if (currentValue <= minValue || currentValue >= maxValue)
     {
         return NOT_OK;
