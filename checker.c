@@ -1,21 +1,30 @@
 #include <stdio.h>
 #include <assert.h>
+#include "batteryCheck.h"
 
 int batteryIsOk(float temperature, float soc, float chargeRate) {
-  if(temperature < 0 || temperature > 45) {
-    printf("Temperature out of range!\n");
-    return 0;
-  } else if(soc < 20 || soc > 80) {
-    printf("State of Charge out of range!\n");
-    return 0;
-  } else if(chargeRate > 0.8) {
-    printf("Charge Rate out of range!\n");
-    return 0;
-  }
-  return 1;
+
+  struct BatteryParameters parameters;
+
+  parameters.temperature = temperature;
+  parameters.soc = soc;
+  parameters.chargeRate = chargeRate;
+
+  return (batteryCheck(parameters));
 }
 
-int main() {
+float convertTempinFahrenite (float tempInCelsius)
+{
+  return ((tempInCelsius * (9/5)) + 32);
+}
+
+float convertTempinCesius (float tempInFahrenite)
+{
+  return ((tempInFahrenite - 32)/1.8);
+}
+
+int main() 
+{
   assert(batteryIsOk(25, 70, 0.7));
   assert(!batteryIsOk(50, 85, 0));
 }
