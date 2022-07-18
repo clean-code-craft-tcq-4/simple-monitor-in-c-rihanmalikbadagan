@@ -2,115 +2,56 @@
 #include "batteryCheck.h"
 #include "messages.h"
 
-int isTempApproachingLowerThreshold(float currentValue)
+void isTempApproachingLowerThreshold(float currentValue)
 {
     if (currentValue <= LOW_TEMP_TOLERANCE_LIMIT)
     {
         printLowTempApproachWarning(EN);
-        //return LOW_LIMIT;
     }
-
-    return NORMAL_LIMIT;
 }
 
-int isTempApproachingHigherThreshold(float currentValue)
+void isTempApproachingHigherThreshold(float currentValue)
 {
     if (currentValue >= HIGH_TEMP_TOLERANCE_LIMIT)
     {
-        printf("--%f--%f\n",HIGH_TEMP_TOLERANCE_LIMIT,currentValue);
         printHighTempApproachWarning(EN);
-        //return HIGH_LIMIT;
     }
-
-    return NORMAL_LIMIT;
 }
 
-int isSOCApproachingLowerThreshold(float currentValue)
+void isSOCApproachingLowerThreshold(float currentValue)
 {
     if (currentValue <= LOW_SOC_TOLERANCE_LIMIT)
     {
         printLowSocApproachWarning(EN);
-        //return LOW_LIMIT;
     }
-
-    return NORMAL_LIMIT;
 }
 
-int isSOCApproachingHigherThreshold(float currentValue)
+void isSOCApproachingHigherThreshold(float currentValue)
 {
     if (currentValue >= HIGH_SOC_TOLERANCE_LIMIT)
     {
-        printf("--%f--%f\n",HIGH_SOC_TOLERANCE_LIMIT,currentValue);
         printHighSocApproachWarning(EN);
-        //return HIGH_LIMIT;
     }
-
-    return NORMAL_LIMIT;
 }
-int isCRApproachingLowerThreshold(float currentValue)
+
+void isCRApproachingLowerThreshold(float currentValue)
 {
     if (currentValue <= LOW_CR_TOLERANCE_LIMIT)
     {
         printLowCRApproachWarning(EN);
-        //return LOW_LIMIT;
     }
-
-    return NORMAL_LIMIT;
 }
 
-int isCRApproachingHigherThreshold(float currentValue)
+void isCRApproachingHigherThreshold(float currentValue)
 {
     if (currentValue >= HIGH_CR_TOLERANCE_LIMIT)
     {
-        
-        printf("--%f--%f\n",HIGH_CR_TOLERANCE_LIMIT,currentValue);
         printHighCRApproachWarning(EN);
-        //return HIGH_LIMIT;
-    }
-
-    return NORMAL_LIMIT;
-}
-
-/*void checkTemperatureApproachingLimit(float currentTemp)
-{
-    if(isApproachingHigherThreshold(currentTemp, HIGH_TEMP_TOLERANCE_LIMIT))
-    {
-        printHighTempApproachWarning(EN);
-    } 
-    else if (isApproachingLowerThreshold(currentTemp, LOW_TEMP_TOLERANCE_LIMIT))
-    {
-        printLowTempApproachWarning(EN);
-    }
-
-}
-
-void checkSocApproachingLimit(float currentSoc)
-{
-    if(isApproachingHigherThreshold(currentSoc, HIGH_SOC_TOLERANCE_LIMIT))
-    {
-        printHighSocApproachWarning(EN);
-    } 
-    else if (isApproachingLowerThreshold(currentSoc, LOW_SOC_TOLERANCE_LIMIT))
-    {
-        printLowSocApproachWarning(EN);
     }
 }
-
-void checkChargeRateApproachingLimit(float currentChargeRate)
-{
-    if(isApproachingHigherThreshold(currentChargeRate, HIGH_CR_TOLERANCE_LIMIT))
-    {
-        printHighCRApproachWarning(EN);
-    } 
-    else if (isApproachingLowerThreshold(currentChargeRate, LOW_CR_TOLERANCE_LIMIT))
-    {
-        printLowCRApproachWarning(EN);
-    }
-}*/
 
 int checkParameters (float currentValue, float minValue, float maxValue)
 {
-    printf("\n %f ## %f ## %f\n",currentValue,minValue,maxValue);
     if (currentValue <= minValue || currentValue >= maxValue)
     {
         return NOT_OK;
@@ -121,19 +62,14 @@ int checkParameters (float currentValue, float minValue, float maxValue)
 
 int batteryCheck(struct BatteryParameters parameters)
 {
-    float a = checkParameters(parameters.temperature, TEMP_LOW_LIMIT, TEMP_HIGH_LIMIT);
-    float b = checkParameters(parameters.soc, SOC_LOW_LIMIT, SOC_HIGH_LIMIT);
-    float c = checkParameters (parameters.chargeRate, CR_LOW_LIMIT, CR_HIGH_LIMIT);
-    printf("\n %f -- %f -- %f\n",parameters.temperature,parameters.soc,parameters.chargeRate);
-    printf("\n %f --- %f --- %f\n", a,b,c);
     if (checkParameters(parameters.temperature, TEMP_LOW_LIMIT, TEMP_HIGH_LIMIT) 
         && checkParameters(parameters.soc, SOC_LOW_LIMIT, SOC_HIGH_LIMIT) 
             && checkParameters (parameters.chargeRate, CR_LOW_LIMIT, CR_HIGH_LIMIT))
     {
-        return NOT_OK;
+        isBatteryAttributesApproachingLimit(parameters);
+        return IS_OK;
     }
-    printf("\n %f +--- %f +--- %f\n", a,b,c);
-    return IS_OK;
+    return NOT_OK;
 }
 
 void isBatteryAttributesApproachingLimit(struct BatteryParameters parameters)
