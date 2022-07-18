@@ -9,7 +9,7 @@ int batteryIsOk(float temperature, float soc, float chargeRate) {
   parameters.temperature = temperature;
   parameters.soc = soc;
   parameters.chargeRate = chargeRate;
-
+  isBatteryAttributesApproachingLimit(parameters);
   return (batteryCheck(parameters));
 }
 

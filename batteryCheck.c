@@ -124,12 +124,7 @@ int batteryCheck(struct BatteryParameters parameters)
         return NOT_OK;
     } //else
     {
-        isTempApproachingLowerThreshold(parameters.temperature);
-        isTempApproachingHigherThreshold(parameters.temperature);
-        isSOCApproachingLowerThreshold(parameters.soc);
-        isSOCApproachingHigherThreshold(parameters.soc);
-        isCRApproachingLowerThreshold(parameters.chargeRate);
-        isCRApproachingHigherThreshold(parameters.chargeRate);
+        
         /*
         checkTemperatureApproachingLimit(parameters.temperature);
         checkSocApproachingLimit(parameters.soc);
@@ -137,4 +132,14 @@ int batteryCheck(struct BatteryParameters parameters)
     }
 
     return IS_OK;
+}
+
+void isBatteryAttributesApproachingLimit(struct BatteryParameters parameters)
+{
+    isTempApproachingLowerThreshold(parameters.temperature);
+    isTempApproachingHigherThreshold(parameters.temperature);
+    isSOCApproachingLowerThreshold(parameters.soc);
+    isSOCApproachingHigherThreshold(parameters.soc);
+    isCRApproachingLowerThreshold(parameters.chargeRate);
+    isCRApproachingHigherThreshold(parameters.chargeRate);
 }
