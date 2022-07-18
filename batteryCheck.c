@@ -66,7 +66,7 @@ int batteryCheck(struct BatteryParameters parameters)
         && checkParameters(parameters.soc, SOC_LOW_LIMIT, SOC_HIGH_LIMIT) 
             && checkParameters (parameters.chargeRate, CR_LOW_LIMIT, CR_HIGH_LIMIT))
     {
-        isBatteryAttributesApproachingLimit(parameters);
+        //isBatteryAttributesApproachingLimit(parameters);
         return IS_OK;
     }
     return NOT_OK;
