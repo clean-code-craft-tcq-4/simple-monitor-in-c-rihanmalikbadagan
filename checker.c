@@ -1,10 +1,19 @@
 #include <stdio.h>
 #include <assert.h>
-#include "batteryCheckStub.h"
+#include "batteryCheck.h"
 
 int batteryIsOk(float temperature, float soc, float chargeRate) {
+  BatteryParameters parameters;
+  parameters.temperature = temperature;
+  parameters.soc = soc;
+  parameters.chargeRate = chargeRate;
 
-  return (batteryCheck(temperature, 0, 45) && batteryCheck(soc, 20, 80) && batteryCheck(chargeRate, 0, 0.8));
+  return (batteryCheck(parameters));
+}
+
+float convertTempinFahrenite (float tempInCelsius)
+{
+  return ((tempInCelsius * (9/5)) + 32);
 }
 
 int main() {
