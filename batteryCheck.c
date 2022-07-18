@@ -2,27 +2,72 @@
 #include "batteryCheck.h"
 #include "messages.h"
 
-int isApproachingLowerThreshold(float currentValue, float toleranceLimit)
+int isTempApproachingLowerThreshold(float currentValue)
 {
-    if (currentValue <= toleranceLimit)
+    if (currentValue <= LOW_TEMP_TOLERANCE_LIMIT)
     {
-        return LOW_LIMIT;
+        printLowTempApproachWarning(EN);
+        //return LOW_LIMIT;
     }
 
     return NORMAL_LIMIT;
 }
 
-int isApproachingHigherThreshold(float currentValue, float toleranceLimit)
+int isTempApproachingHigherThreshold(float currentValue)
 {
-    if (currentValue >= toleranceLimit)
+    if (currentValue >= HIGH_TEMP_TOLERANCE_LIMIT)
     {
-        return HIGH_LIMIT;
+        printHighTempApproachWarning(EN);
+        //return HIGH_LIMIT;
     }
 
     return NORMAL_LIMIT;
 }
 
-void checkTemperatureApproachingLimit(float currentTemp)
+int isSOCApproachingLowerThreshold(float currentValue)
+{
+    if (currentValue <= LOW_SOC_TOLERANCE_LIMIT)
+    {
+        printLowSocApproachWarning(EN);
+        //return LOW_LIMIT;
+    }
+
+    return NORMAL_LIMIT;
+}
+
+int isSOCApproachingHigherThreshold(float currentValue)
+{
+    if (currentValue >= HIGH_SOC_TOLERANCE_LIMIT)
+    {
+        printHighSocApproachWarning(EN);
+        //return HIGH_LIMIT;
+    }
+
+    return NORMAL_LIMIT;
+}
+int isCRApproachingLowerThreshold(float currentValue)
+{
+    if (currentValue <= LOW_CR_TOLERANCE_LIMIT)
+    {
+        printLowCRApproachWarning(EN);
+        //return LOW_LIMIT;
+    }
+
+    return NORMAL_LIMIT;
+}
+
+int isCRApproachingHigherThreshold(float currentValue)
+{
+    if (currentValue >= HIGH_CR_TOLERANCE_LIMIT)
+    {
+        printHighCRApproachWarning(EN);
+        //return HIGH_LIMIT;
+    }
+
+    return NORMAL_LIMIT;
+}
+
+/*void checkTemperatureApproachingLimit(float currentTemp)
 {
     if(isApproachingHigherThreshold(currentTemp, HIGH_TEMP_TOLERANCE_LIMIT))
     {
@@ -67,7 +112,7 @@ int checkParameters (float currentValue, float minValue, float maxValue)
     }
 
     return IS_OK;
-}
+}*/
 
 int batteryCheck(struct BatteryParameters parameters)
 {
@@ -79,9 +124,16 @@ int batteryCheck(struct BatteryParameters parameters)
         return NOT_OK;
     } else
     {
+        isTempApproachingLowerThreshold(parameters.temperature);
+        isTempApproachingHigherThreshold(parameters.temperature)
+        isSOCApproachingLowerThreshold(parameters.soc);
+        isSOCApproachingHigherThreshold(parameters.soc);
+        isCRApproachingLowerThreshold(parameters.chargeRate);
+        isCRApproachingHigherThreshold(parameters.chargeRate);
+        /*
         checkTemperatureApproachingLimit(parameters.temperature);
         checkSocApproachingLimit(parameters.soc);
-        checkChargeRateApproachingLimit(parameters.chargeRate);
+        checkChargeRateApproachingLimit(parameters.chargeRate);*/
     }
 
     return IS_OK;
