@@ -10,6 +10,7 @@ int batteryIsOk(float temperature, float soc, float chargeRate) {
   parameters.soc = soc;
   parameters.chargeRate = chargeRate;
   isBatteryAttributesApproachingLimit(parameters);
+  printf("\n %f ** %f ** %f\n",parameters.temperature,parameters.soc,parameters.chargeRate);
   return (batteryCheck(parameters));
 }
 
