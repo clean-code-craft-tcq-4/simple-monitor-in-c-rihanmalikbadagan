@@ -117,11 +117,14 @@ int checkParameters (float currentValue, float minValue, float maxValue)
 
 int batteryCheck(struct BatteryParameters parameters)
 {
+    float a = checkParameters(parameters.temperature, TEMP_LOW_LIMIT, TEMP_HIGH_LIMIT);
+    float b = checkParameters(parameters.soc, SOC_LOW_LIMIT, SOC_HIGH_LIMIT);
+    float c = checkParameters (parameters.chargeRate, CR_LOW_LIMIT, CR_HIGH_LIMIT);
     printf("\n %f -- %f -- %f\n",parameters.temperature,parameters.soc,parameters.chargeRate);
-    printf("\n %f --- %f --- %f\n",checkParameters(parameters.temperature, TEMP_LOW_LIMIT, TEMP_HIGH_LIMIT),checkParameters(parameters.soc, SOC_LOW_LIMIT, SOC_HIGH_LIMIT),checkParameters (parameters.chargeRate, CR_LOW_LIMIT, CR_HIGH_LIMIT));
-    if ((checkParameters(parameters.temperature, TEMP_LOW_LIMIT, TEMP_HIGH_LIMIT) 
+    printf("\n %f --- %f --- %f\n", a,b,c);
+    if (checkParameters(parameters.temperature, TEMP_LOW_LIMIT, TEMP_HIGH_LIMIT) 
         || checkParameters(parameters.soc, SOC_LOW_LIMIT, SOC_HIGH_LIMIT) 
-            || checkParameters (parameters.chargeRate, CR_LOW_LIMIT, CR_HIGH_LIMIT)))
+            || checkParameters (parameters.chargeRate, CR_LOW_LIMIT, CR_HIGH_LIMIT))
     {
         return NOT_OK;
     }
