@@ -106,7 +106,7 @@ void checkChargeRateApproachingLimit(float currentChargeRate)
 
 int checkParameters (float currentValue, float minValue, float maxValue)
 {
-    if (currentValue < minValue || currentValue > maxValue)
+    if (currentValue <= minValue || currentValue >= maxValue)
     {
         return NOT_OK;
     }
@@ -116,7 +116,7 @@ int checkParameters (float currentValue, float minValue, float maxValue)
 
 int batteryCheck(struct BatteryParameters parameters)
 {
-
+    printf("%f -- %f -- %f",parameters.temperature,parameters.soc,parameters.chargeRate);
     if ((checkParameters(parameters.temperature, TEMP_LOW_LIMIT, TEMP_HIGH_LIMIT) 
         || checkParameters(parameters.soc, SOC_LOW_LIMIT, SOC_HIGH_LIMIT) 
             || checkParameters (parameters.chargeRate, CR_LOW_LIMIT, CR_HIGH_LIMIT)))
