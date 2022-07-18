@@ -8,7 +8,8 @@ void checkTemperatureApproachingLimit(float currentTemp, float tempToleranceLimi
     if(isApproachingHigherThreshold(currentTemp, tempToleranceLimit))
     {
         printHighTempApproachWarning(EN);
-    } else if (isApproachingLowerThreshold(currentTemp, tempToleranceLimit))
+    } 
+    else if (isApproachingLowerThreshold(currentTemp, tempToleranceLimit))
     {
         printLowTempApproachWarning(EN);
     }
@@ -20,7 +21,8 @@ void checkSocApproachingLimit(float currentSoc, float socToleranceLimit)
     if(isApproachingHigherThreshold(currentSoc, socToleranceLimit))
     {
         printHighSocApproachWarning(EN);
-    } else if (isApproachingLowerThreshold(currentSoc, socToleranceLimit))
+    } 
+    else if (isApproachingLowerThreshold(currentSoc, socToleranceLimit))
     {
         printLowSocApproachWarning(EN);
     }
@@ -31,7 +33,8 @@ void checkChargeRateApproachingLimit(float currentChargeRate, float chargeRateTo
     if(isApproachingHigherThreshold(currentChargeRate, chargeRateToleranceLimit))
     {
         printHighCRApproachWarning(EN);
-    } else if (isApproachingLowerThreshold(currentChargeRate, chargeRateToleranceLimit))
+    } 
+    else if (isApproachingLowerThreshold(currentChargeRate, chargeRateToleranceLimit))
     {
         printLowCRApproachWarning(EN);
     }
