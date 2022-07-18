@@ -125,7 +125,7 @@ int batteryCheck(struct BatteryParameters parameters)
     } else
     {
         isTempApproachingLowerThreshold(parameters.temperature);
-        isTempApproachingHigherThreshold(parameters.temperature)
+        isTempApproachingHigherThreshold(parameters.temperature);
         isSOCApproachingLowerThreshold(parameters.soc);
         isSOCApproachingHigherThreshold(parameters.soc);
         isCRApproachingLowerThreshold(parameters.chargeRate);
