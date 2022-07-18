@@ -3,7 +3,9 @@
 #include "batteryCheck.h"
 
 int batteryIsOk(float temperature, float soc, float chargeRate) {
-  BatteryParameters parameters;
+
+  struct BatteryParameters parameters;
+
   parameters.temperature = temperature;
   parameters.soc = soc;
   parameters.chargeRate = chargeRate;

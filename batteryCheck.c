@@ -2,39 +2,58 @@
 #include "batteryCheck.h"
 #include "messages.h"
 
-
-void checkTemperatureApproachingLimit(float currentTemp, float tempToleranceLimit)
+int isApproachingLowerThreshold(float currentValue, float toleranceLimit)
 {
-    if(isApproachingHigherThreshold(currentTemp, tempToleranceLimit))
+    if (currentValue < (minValue + TOLERENCE_LIMIT(maxValue)))
+    {
+        return LOW_LIMIT;
+    }
+
+    return NORMAL_LIMIT;
+}
+
+int isApproachingHigherThreshold(float currentValue, float toleranceLimit)
+{
+    if (currentValue > (maxValue - TOLERANCE_LIMIT(maxValue)))
+    {
+        return HIGH_LIMIT;
+    }
+
+    return NORMAL_LIMIT;
+}
+
+void checkTemperatureApproachingLimit(float currentTemp)
+{
+    if(isApproachingHigherThreshold(currentTemp, HIGH_TEMP_TOLERANCE_LIMIT))
     {
         printHighTempApproachWarning(EN);
     } 
-    else if (isApproachingLowerThreshold(currentTemp, tempToleranceLimit))
+    else if (isApproachingLowerThreshold(currentTemp, LOW_TEMP_TOLERANCE_LIMIT))
     {
         printLowTempApproachWarning(EN);
     }
 
 }
 
-void checkSocApproachingLimit(float currentSoc, float socToleranceLimit)
+void checkSocApproachingLimit(float currentSoc)
 {
-    if(isApproachingHigherThreshold(currentSoc, socToleranceLimit))
+    if(isApproachingHigherThreshold(currentSoc, HIGH_SOC_TOLERANCE_LIMIT))
     {
         printHighSocApproachWarning(EN);
     } 
-    else if (isApproachingLowerThreshold(currentSoc, socToleranceLimit))
+    else if (isApproachingLowerThreshold(currentSoc, LOW_SOC_TOLERANCE_LIMIT))
     {
         printLowSocApproachWarning(EN);
     }
 }
 
-void checkChargeRateApproachingLimit(float currentChargeRate, float chargeRateToleranceLimit)
+void checkChargeRateApproachingLimit(float currentChargeRate)
 {
-    if(isApproachingHigherThreshold(currentChargeRate, chargeRateToleranceLimit))
+    if(isApproachingHigherThreshold(currentChargeRate, HIGH_CR_TOLERANCE_LIMIT))
     {
         printHighCRApproachWarning(EN);
     } 
-    else if (isApproachingLowerThreshold(currentChargeRate, chargeRateToleranceLimit))
+    else if (isApproachingLowerThreshold(currentChargeRate, LOW_CR_TOLERANCE_LIMIT))
     {
         printLowCRApproachWarning(EN);
     }
@@ -50,26 +69,6 @@ int checkParameters (float currentValue, float minValue, float maxValue)
     return IS_OK;
 }
 
-int isApproachingLowerThreshold(float currentValue, float minValue, float maxValue)
-{
-    if (currentValue < (minValue + TOLERENCE_LIMIT(maxValue)))
-    {
-        return LOW_LIMIT;
-    }
-
-    return NORMAL_LIMIT;
-}
-
-int isApproachingHigherThreshold(float currentValue, float minValue, float maxValue)
-{
-    if (currentValue > (maxValue - TOLERANCE_LIMIT(maxValue)))
-    {
-        return HIGH_LIMIT;
-    }
-
-    return NORMAL_LIMIT;
-}
-
 int batteryCheck(BatteryParameters parameters)
 {
 
@@ -80,9 +79,9 @@ int batteryCheck(BatteryParameters parameters)
         return NOT_OK;
     } else
     {
-        checkTemperatureApproachingLimit(parameters.temperature, TEMP_TOLERANCE_LIMIT);
-        checkSocApproachingLimit(parameters.soc, SOC_TOLERANCE_LIMIT);
-        checkChargeRateApproachingLimit(parameters.chargeRate, CR_TOLERANCE_LIMIT);
+        checkTemperatureApproachingLimit(parameters.temperature);
+        checkSocApproachingLimit(parameters.soc);
+        checkChargeRateApproachingLimit(parameters.chargeRate);
     }
 
     return IS_OK;
