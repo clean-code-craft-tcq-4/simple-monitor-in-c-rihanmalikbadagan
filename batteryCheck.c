@@ -17,7 +17,7 @@ int isTempApproachingHigherThreshold(float currentValue)
 {
     if (currentValue >= HIGH_TEMP_TOLERANCE_LIMIT)
     {
-        printf("--%f--\n",HIGH_TEMP_TOLERANCE_LIMIT);
+        printf("--%f--%f\n",HIGH_TEMP_TOLERANCE_LIMIT,currentValue);
         printHighTempApproachWarning(EN);
         //return HIGH_LIMIT;
     }
@@ -40,7 +40,7 @@ int isSOCApproachingHigherThreshold(float currentValue)
 {
     if (currentValue >= HIGH_SOC_TOLERANCE_LIMIT)
     {
-        printf("--%f--\n",HIGH_SOC_TOLERANCE_LIMIT);
+        printf("--%f--%f\n",HIGH_SOC_TOLERANCE_LIMIT,currentValue);
         printHighSocApproachWarning(EN);
         //return HIGH_LIMIT;
     }
@@ -51,7 +51,6 @@ int isCRApproachingLowerThreshold(float currentValue)
 {
     if (currentValue <= LOW_CR_TOLERANCE_LIMIT)
     {
-        printf("--%f--\n",LOW_CR_TOLERANCE_LIMIT);
         printLowCRApproachWarning(EN);
         //return LOW_LIMIT;
     }
@@ -63,6 +62,8 @@ int isCRApproachingHigherThreshold(float currentValue)
 {
     if (currentValue >= HIGH_CR_TOLERANCE_LIMIT)
     {
+        
+        printf("--%f--%f\n",HIGH_CR_TOLERANCE_LIMIT,currentValue);
         printHighCRApproachWarning(EN);
         //return HIGH_LIMIT;
     }
