@@ -60,13 +60,18 @@ int checkParameters (float currentValue, float minValue, float maxValue)
     return IS_OK;
 }
 
+int checkBatteryAttributes(struct BatteryParameters parameters)
+{
+    return (checkParameters(parameters.temperature, TEMP_LOW_LIMIT, TEMP_HIGH_LIMIT) 
+             && checkParameters(parameters.soc, SOC_LOW_LIMIT, SOC_HIGH_LIMIT) 
+                && checkParameters (parameters.chargeRate, CR_LOW_LIMIT, CR_HIGH_LIMIT));
+}
+
 int batteryCheck(struct BatteryParameters parameters)
 {
-    if (checkParameters(parameters.temperature, TEMP_LOW_LIMIT, TEMP_HIGH_LIMIT) 
-        && checkParameters(parameters.soc, SOC_LOW_LIMIT, SOC_HIGH_LIMIT) 
-            && checkParameters (parameters.chargeRate, CR_LOW_LIMIT, CR_HIGH_LIMIT))
+    if (checkBatteryAttributes(parameters))
     {
-        //isBatteryAttributesApproachingLimit(parameters);
+        isBatteryAttributesApproachingLimit(parameters);
         return IS_OK;
     }
     return NOT_OK;
