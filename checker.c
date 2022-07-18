@@ -21,7 +21,7 @@ float convertTempinFahrenite (float tempInCelsius)
 int main() 
 {
   batteryIsOk(25, 70, 0.7);
-  batteryIsOk(50, 85, 0)
+  batteryIsOk(50, 85, 0);
   //assert(batteryIsOk(25, 70, 0.7));
   //assert(!batteryIsOk(50, 85, 0));
 }
