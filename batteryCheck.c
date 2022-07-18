@@ -122,7 +122,7 @@ int batteryCheck(struct BatteryParameters parameters)
             && checkParameters (parameters.chargeRate, CR_LOW_LIMIT, CR_HIGH_LIMIT)) == NOT_OK)
     {
         return NOT_OK;
-    } else
+    } //else
     {
         isTempApproachingLowerThreshold(parameters.temperature);
         isTempApproachingHigherThreshold(parameters.temperature);
