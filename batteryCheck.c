@@ -102,7 +102,7 @@ void checkChargeRateApproachingLimit(float currentChargeRate)
     {
         printLowCRApproachWarning(EN);
     }
-}
+}*/
 
 int checkParameters (float currentValue, float minValue, float maxValue)
 {
@@ -112,7 +112,7 @@ int checkParameters (float currentValue, float minValue, float maxValue)
     }
 
     return IS_OK;
-}*/
+}
 
 int batteryCheck(struct BatteryParameters parameters)
 {
